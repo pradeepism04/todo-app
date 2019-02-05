@@ -10,7 +10,7 @@ import {TodoServicesService} from './services/todo-services.service'
 })
 export class TodoComponent implements OnInit {
   toDoListArray: any[];
-  is_checked=false;
+  is_checked=true;
   error_mes="";
   error_message=false;
   constructor( private TodoService: TodoServicesService ) { }
