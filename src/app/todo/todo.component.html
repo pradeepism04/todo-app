@@ -1,0 +1,117 @@
+
+
+<div class="jumbotron" style="padding: 45px 0px">
+  <h4 style="text-align: center;">TODO LIST</h4>
+</div>
+
+<div>
+    <button    (click) ="changebuttonType()" style="background-color:#e9ecef" >  Show TODO List </button>
+
+</div>
+
+<div class="input-group">
+  <input type="text" class="form-control" #itemTitle>
+  <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)" style="background-color: #e9ecef;">
+      <i class="fa fa-plus-circle fa-2x"></i>
+  </div>
+</div>
+
+
+
+<div>
+
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Check</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+            <tbody *ngFor="let item of toDoListArray" >
+                <tr  *ngIf="!item.isChecked || is_checked" >
+          
+                  <td class="center"> 
+                      <span class="hover-cursor pull-left" [class.text-sucsess]="item.isChecked" (click)="alterCheck(item.$key, item.isChecked)" > 
+                          <i class="fa fa-lg" [ngClass]=" !item.isChecked? 'fa-circle-o':'fa-check-circle' " ></i>
+                      </span>
+                    </td>
+                  <td> 
+                      {{item.title}}
+                  </td>
+                  <td>
+
+                      <p>Today is {{ item.date | date }} </p>
+                     
+                    <!-- {{item.date}} -->
+                  </td>
+                  <td>
+                      <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)" >
+                          <i class="fa fa-trash-o fa-lg"></i>
+                      </span>
+                  </td>
+                </tr>
+        </tbody>
+      </table>
+
+
+
+
+  <!-- <table>
+    <thead>
+      <th>chek</th>
+      <th>title</th>
+      <th>time</th>
+      <th>action </th>
+
+    </thead>
+    <tbody *ngFor="let item of toDoListArray" >
+      <tr  *ngIf="!item.isChecked || is_checked" >
+
+        <td class="center"> 
+            <span class="hover-cursor pull-left" [class.text-sucsess]="item.isChecked" (click)="alterCheck(item.$key, item.isChecked)" > 
+                <i class="fa fa-lg" [ngClass]=" !item.isChecked? 'fa-circle-o':'fa-check-circle' " ></i>
+            </span>
+          </td>
+        <td> 
+            {{item.title}}
+        </td>
+        <td>
+          {{item.date}}
+        </td>
+        <td>
+            <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)" >
+                <i class="fa fa-trash-o fa-lg"></i>
+            </span>
+        </td>
+
+
+
+      </tr>
+
+    </tbody>
+  </table> -->
+  <!-- <ul class="list-group">
+    <div *ngFor="let item of toDoListArray">
+
+      <li class="list-group-item"  *ngIf="!item.isChecked || is_checked">
+          <span class="hover-cursor pull-left" [class.text-sucsess]="item.isChecked" (click)="alterCheck(item.$key, item.isChecked)" > 
+              <i class="fa fa-lg" [ngClass]=" !item.isChecked? 'fa-circle-o':'fa-check-circle' " ></i>
+          </span>
+          <span class="pull-left" style="margin-left:  15px;">  {{item.title}} </span>
+         
+          <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)" >
+              <i class="fa fa-trash-o fa-lg"></i>
+          </span>
+          
+        
+
+      </li>
+    </div>
+
+  </ul> -->
+</div>
+
