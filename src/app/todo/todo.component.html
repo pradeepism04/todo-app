@@ -8,11 +8,12 @@
     <button    (click) ="changebuttonType()" style="background-color:#e9ecef" >  Show TODO List </button>
 
 </div>
+<div *ngIf="error_message" class="btn btn-warning" ><p  >{{error_mes}}</p> </div>
 
 <div class="input-group">
   <input type="text" class="form-control" #itemTitle>
   <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)" style="background-color: #e9ecef;">
-      <i class="fa fa-plus-circle fa-2x"></i>
+      <i class="fa fa-plus-circle fa-2x icon_class"></i>
   </div>
 </div>
 
@@ -36,7 +37,7 @@
           
                   <td class="center"> 
                       <span class="hover-cursor pull-left" [class.text-sucsess]="item.isChecked" (click)="alterCheck(item.$key, item.isChecked)" > 
-                          <i class="fa fa-lg" [ngClass]=" !item.isChecked? 'fa-circle-o':'fa-check-circle' " ></i>
+                          <i class="fa fa-lg " [ngClass]=" !item.isChecked? 'fa-circle-o':'fa-check-circle' "  ></i>
                       </span>
                     </td>
                   <td> 
@@ -44,7 +45,7 @@
                   </td>
                   <td>
 
-                      <p>Today is {{ item.date | date }} </p>
+                      <p>Today is {{ item.date }} </p>
                      
                     <!-- {{item.date}} -->
                   </td>

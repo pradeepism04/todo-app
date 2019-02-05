@@ -11,12 +11,16 @@ import {TodoServicesService} from './services/todo-services.service'
 export class TodoComponent implements OnInit {
   toDoListArray: any[];
   is_checked=false;
+  error_mes="";
+  error_message=false;
   constructor( private TodoService: TodoServicesService ) { }
 
   changebuttonType(){
     this.is_checked=!this.is_checked;
   }
   ngOnInit() {
+    this.error_message=false;
+    this.error_mes="";
     this.TodoService.getToDoList().snapshotChanges().
     subscribe(item=>{
       this.toDoListArray=[];
@@ -35,9 +39,32 @@ export class TodoComponent implements OnInit {
   }
 
   onAdd(itemTitle){
-    this.checkRecord(itemTitle);
-    this.TodoService.addTitle(itemTitle.value);
-    itemTitle.value=null;
+    if (itemTitle.value.trim()!==''){
+    let check_status=this.checkRecord(itemTitle.value.trim());
+    // console.log(check_status);
+    if(check_status!==""){
+      this.error_message=true;
+      this.error_mes="Record found in DB";
+      setTimeout(()=>{
+        this.error_message=false;
+    },(2000));
+      this.TodoService.checkOrUncheckTitle(check_status, false);
+      itemTitle.value=null;
+    }else{
+      this.TodoService.addTitle(itemTitle.value);
+      itemTitle.value=null;
+    }
+    // this.TodoService.addTitle(itemTitle.value);
+    // itemTitle.value=null;
+
+    }else{
+      this.error_message=true;
+      setTimeout(()=>{
+        this.error_message=false;
+    },(2000));
+      this.error_mes="Please enter some Input";
+
+    }
   }
 
   alterCheck($key:string, isChecked){
@@ -48,28 +75,16 @@ export class TodoComponent implements OnInit {
     this.TodoService.removeTitle($key);
   }
 
-  checkRecord($key){
-    console.log(this.toDoListArray.length);
-    console.log($key.value);
-    // this.toDoListArray.forEach((key : any, val: any) => {
-    //   console.log(key);
-    //   console.log($key.value);
-    //   console.log(key.indexOf($key.value));
-      
-      // if (key.title==$key.value){
-      //   console.log("value found in db");
-      // }else{
-      //   console.log("it was else part");
-      // }
+  checkRecord(item){
+    let check_found="";
+    this.toDoListArray.forEach((key : any, val: any) => {
+      console.log(key.$key);
+      if ( key.title!== undefined && key.title.toLowerCase()===item.toLowerCase()){
+        check_found= key.$key;
+      }
 
-  // })
-
-    
-
-
-   
-   
-  }
-
+  });
+  return check_found;
+}
 
 }

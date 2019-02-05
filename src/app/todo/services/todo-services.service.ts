@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabaseModule, AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 declare var require: any;
 
-let {dateformat}= require('dateformat');
+let dateformat= require('dateformat');
 @Injectable({
   providedIn: 'root'
 })
