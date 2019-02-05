@@ -28,3 +28,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 #todoApp
+step1: git clone 
+step2: npm install 
+step3; ng serve
+
+
+# show_Todo List  button  functionality 
+  once a click on, it's show all todo List 
+  again we click, then it's show only incompleted todo List
+
+  once a click on chekc circle then it's toggle ( according to show todo list button )
